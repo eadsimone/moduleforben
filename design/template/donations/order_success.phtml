@@ -1,0 +1,66 @@
+<?php /* @var $this Lucky_Donations_Block_Order_Success */ ?>
+<?php if($this->isEnabled()): ?>
+<?php
+  $_amount = $this->getCalculatedAmount();
+  $_amountFormatted = $this->getCalculatedAmountFormatted();
+  $_commission = $this->getCommissionRateFormatted();
+?>
+<div class="donate-success-page">
+    <p>
+        Please choose from the drop-down list below which pro-freedom organization you'd like us to donate <?php echo $_commission ?> of your purchase to.
+        Make your selection and press the "Donate Now" button to submit. We'll automatically donate <?php echo $_amountFormatted; ?> on your behalf to your organization that shares our pro-freedom values.<br>
+        <a href="/donations" target="_blank">Learn More</a>
+    </p>
+
+    <div class="donate-form">
+        <ul class="form-list">
+            <label for="charity">Donate <?php echo $_amountFormatted ;?> To:</label>
+            <div class="input-box">
+                <select id="charity" name="charity" class="validate-select">
+                  <?php foreach ($this->getCharities() as $charity): ?>
+                    <option value="<?php echo $charity['value']; ?>"><?php echo $this->escapeHtml($charity['label']); ?></option>
+                  <?php endforeach; ?>
+                </select>
+            </div>
+        </ul>
+
+        <button id="donateNow" type="button" class="button btn-donate"><span><span><?php echo $this->__('Donate Now') ?></span></span></button>
+    </div>
+
+    <div class="donate-tip" id="donate-tip"></div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+  var Donation = Class.create({
+    initialize : function(selectId,buttonId,targetId,action)
+    {
+      this.action = action;
+      this.selectEl = $(selectId);
+      this.target = $(targetId);
+      this.button = $(buttonId);
+      this.button.observe('click',this.makeDonation.bindAsEventListener(this));
+    },
+    makeDonation: function(e){
+      Event.stop(e);
+      new Ajax.Request(this.action,{
+        method: 'post',
+        parameters: {charity_id:this.selectEl.value},
+        onLoading: function(){
+          this.button.replace('<div class="ajaxloader1" id="ajaxloader1"><span class="hidden">&nbsp;</span></div>');
+          this.selectEl.disable();
+        }.bind(this),
+        onSuccess: function(data){
+          var html = data.responseText;
+          this.target.update(html);
+          $('ajaxloader1').remove();
+        }.bind(this),
+        onFailure: function(){}
+      });
+    }
+  });
+  document.observe('dom:loaded',function(){
+    var donate = new Donation('charity','donateNow','donate-tip','<?php echo $this->getDonateNowAction(); ?>');
+  })
+//]]>
+</script>
+<?php endif; ?>

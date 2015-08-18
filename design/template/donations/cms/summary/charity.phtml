@@ -1,0 +1,17 @@
+/**
+ * Renders a single charity's raised amount box
+ */
+$url = $this->getWebsiteUri(); // @var Zend_Uri_Http
+?>
+<li class="charity clearfix pos-<?php echo $this->getCssPosition() ?>">
+    <div class="charity-info left">
+        <span class="charity-name"><?php echo $this->getName() ?></span>
+        <?php if($url): ?>
+            <a class="charity-website" href="<?php echo $url ?>" title="Visit Website" rel="external"><?php echo $url->getHost() ?></a>
+        <?php endif ?>
+    </div>
+    <div class="charity-total right">
+        <strong><?php echo $this->getTotalDonated() ?></strong><br />
+        <span>Raised</span>
+    </div>
+</li>

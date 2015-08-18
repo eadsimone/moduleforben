@@ -1,0 +1,8 @@
+<?php /* @var $this Lucky_Donations_Block_Cms_Summary */ ?>
+<!--<ul id="donations-summary" class="clearfix">-->
+<ul class="hero-grid">
+    <?php
+    foreach($this->getCharities() as $charity){
+        echo $charity->toHtml();
+    }?>
+</ul><!-- #donations-summary -->

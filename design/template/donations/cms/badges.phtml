@@ -1,0 +1,28 @@
+<?php
+$htmlId = "badge-generator-{$this->getUniqueId()}";
+?>
+<div id="<?php echo $htmlId ?>" class="badge-generator badge-<?php echo $this->getBadgeName() ?>">
+    <div class="badge">
+        <img id="<?php echo $htmlId ?>-image" src="<?php echo $this->getBadgeImage() ?>" alt="<?php echo $this->getBadgeName() ?>" />
+    </div>
+    <div class="controls">
+        Choose <?php echo $this->getTypeName() ?>: 
+        <?php foreach($this->getTypes() as $type): 
+            $radioId = "$htmlId-{$type}";
+            $type = strtolower($type) ?>
+        <span class="type type-<?php echo $type ?>">
+            <label for="<?php echo $radioId ?>"><?php echo ucfirst($type) ?></label>
+            <input type="radio" id="<?php echo $radioId ?>" value="<?php echo $type ?>" name="badges[<?php echo $this->getUniqueId() ?>][type]" <?php echo $this->isDefaultType($type) ? 'checked="checked"' : '' ?> />
+        </span>
+        <?php endforeach ?>
+    </div>
+    <div class="code">
+        Easily Add The Code Below To Your Website Or Blog Now!: <br />
+        <input id="<?php echo $htmlId ?>-code" type="text" value='<a href="<?php echo $this->getLinkUrl() ?>" title="<?php echo $this->getLinkTitle() ?>" alt="<?php echo $this->getLinkAlt() ?>"><img src="{{badge_image}}" border="0" /></a>' />
+    </div>
+</div>
+<script type="text/javascript">
+    Event.observe(window, 'load', function() {
+        var badgeGenerator = new BadgeGenerator('<?php echo $htmlId ?>', ['<?php echo implode("','", array_map('strtolower', $this->getTypes())) ?>']);
+    });
+</script>

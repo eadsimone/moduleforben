@@ -1,0 +1,6 @@
+# Donations
+code                              app/code/local/Lucky/Donations
+Donations.xml                     app/etc/modules/Donations.xml
+design/template/donations         app/design/frontend/base/default/template/donations
+adminhtml/layout/donations.xml    app/design/adminhtml/default/default/layout/donations.xml
+email/                            app/locale/en_US/template/email/donations 

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <cms>
+      <children>
+        <charity translate="title" module="donations">
+          <title>Charities</title>
+          <action>adminhtml/charity/index</action>
+          <sort_order>2000</sort_order>
+        </charity>
+      </children>
+    </cms>
+    <report>
+      <children>
+        <donations translate="title" module="donations">
+          <title>Donations</title>
+          <sort_order>2000</sort_order>
+          <children>
+            <!-- Doesn't work, uses too much memory
+            <byorder translate="title" module="donations">
+              <title>By Order</title>
+              <sort_order>10</sort_order>
+              <action>adminhtml/report_donations/byorder/</action>
+            </byorder>
+            -->
+            <bymonth translate="title" module="donations">
+              <title>By Month</title>
+              <action>adminhtml/report_donations/bymonth/</action>
+              <sort_order>20</sort_order>
+              <resource>report/donations</resource>
+            </bymonth>
+          </children>
+        </donations>
+      </children>
+    </report>
+  </menu>
+  <acl>
+    <resources>
+      <admin>
+        <children>
+          <cms>
+            <children>
+              <charity translate="title">
+                <title>Charities</title>
+              </charity>
+            </children>
+          </cms>
+          <report>
+            <children>
+              <donations translate="title" module="donations">
+                <title>Donations</title>
+                <sort_order>50</sort_order>
+              </donations>
+            </children>
+          </report>
+          <system>
+            <children>
+              <config>
+                <children>
+                  <donations translate="title" module="donations">
+                    <title>Charity Section</title>
+                    <sort_order>50</sort_order>
+                  </donations>
+                  <donations_cms translate="title" module="donations">
+                    <title>Donations CMS Section</title>
+                    <sort_order>50</sort_order>
+                  </donations_cms>
+                </children>
+              </config>
+            </children>
+          </system>
+        </children>
+      </admin>
+    </resources>
+  </acl>
+</config>

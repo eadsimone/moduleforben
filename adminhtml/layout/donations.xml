@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+  <layout>
+    <adminhtml_report_donations_byorder>
+      <reference name="content">
+          <block type="donations/adminhtml_report_byorder" template="report/grid/container.phtml" name="donations.report.grid.container">
+            <block type="adminhtml/store_switcher" template="report/store/switcher/enhanced.phtml" name="store.switcher">
+                <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+            </block>
+            <block type="donations/adminhtml_report_filter_form_byorder" name="grid.filter.form">
+            </block>
+          </block>
+      </reference>
+    </adminhtml_report_donations_byorder>
+    <adminhtml_report_donations_bymonth>
+      <reference name="content">
+          <block type="donations/adminhtml_report_bymonth" template="report/grid/container.phtml" name="donations.report.grid.container">
+            <block type="adminhtml/store_switcher" template="report/store/switcher/enhanced.phtml" name="store.switcher">
+                <action method="setStoreVarName"><var_name>store_ids</var_name></action>
+            </block>
+            <block type="donations/adminhtml_report_filter_form_bymonth" name="grid.filter.form">
+            </block>
+          </block>
+      </reference>
+    </adminhtml_report_donations_bymonth>
+  </layout>

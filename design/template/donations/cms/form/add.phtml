@@ -1,0 +1,69 @@
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+<form id="add-organization-form" action="<?php echo $this->getFormAction(); ?>" method="post">
+    <div id="jointheclub-please-wait" style="display:none; padding:50px 100px; text-align:center; background:#f9f9f9;">
+        <img src="<?php echo $this->getSkinUrl('images/potg/loading.gif') ?>" alt="<?php echo $this->__('Please wait. Sending form...') ?>" title="<?php echo $this->__('Please wait while your form is being sent') ?>" class="v-middle" /> <?php echo $this->__('Please wait while your form is being sent') ?>
+    </div>
+    <fieldset>
+        <div class="clearfix">
+            <div class="column">
+                <div class="row">
+                    <label for="legal-name" class="required">Organization's Legal Name <em>*</em></label>
+                    <input type="text" id="legal-name" name="legal_name" class="input-text required-entry"/>
+                </div>
+                <div class="row">
+                    <label for="full-name" class="required">Contact's Full Name <em>*</em></label>
+                    <input type="text" id="full-name" name="full_name" class="input-text required-entry"/>
+                </div>
+                <div class="row">
+                    <label for="mailing-address" class="required validate-email">Mailing Address <em>*</em></label>
+                    <textarea id="mailing-address" name="mailing_address" class="required-entry"></textarea>
+                </div>
+            </div><!--.column-->
+            <div class="column last">
+                <div class="row">
+                    <label for="website" class="required">Organization's Website <em>*</em></label>
+                    <input type="text" id="website" name="website" class="input-text required-entry"/>
+                </div>
+                <div class="row">
+                    <label for="email" class="required">Email Address <em>*</em></label>
+                    <input type="text" id="email" name="email" class="input-text required-entry"/>
+                </div>
+                <div class="row">
+                    <label for="phone" class="required">Phone Number <em>*</em></label>
+                    <input type="text" id="phone" name="phone" class="input-text required-entry"/>
+                </div>
+                <div class="row">
+                    <label for="tax-id" class="required">Tax ID<em>*</em></label>
+                    <input type="text" id="tax-id" name="tax_id" class="input-text required-entry"/>
+                </div>
+            </div><!--.column-->
+        </div><!-- .clearfix -->
+        <div class="clearfix">
+            <input type="checkbox" name="agree" id="agree-checkbox" class="required-entry"/>
+            <label id="agree-label" for="agree-checkbox">
+                <em>*</em>
+                Your organization's application will be reviewed once you submit 
+                this form. Someone from Ammo.net will be incontact shortly
+                thereafter via either phone or email to notify you about your
+                organization's requested inclusion. Thanks!
+           </label>
+        </div><!-- .clearfix -->
+    </fieldset>
+    <div class="submit-wrapper">
+        <span class="required">* Required Fields</span>
+        <br/>
+        <input type="image" value="Submit" src="<?php echo $this->getSkinUrl('images/donations/form-submit.png') ?>"/>
+    </div>
+</form><!-- #add-organization-form -->
+<script type="text/javascript">
+//<![CDATA[
+	var addOrganizationForm = new VarienForm('add-organization-form', false);
+    Event.observe('addOrganizationForm', 'submit', function() {
+       if(addOrganizationForm.validator && addOrganizationForm.validator.validate()){
+           $('donations-div-form').setStyle('display:none');
+           $('donations-please-wait').setStyle('display:block;');
+       }
+    });
+//]]>
+</script>
